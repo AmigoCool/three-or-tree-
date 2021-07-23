@@ -1,0 +1,136 @@
+[gd_scene load_steps=33 format=2]
+
+[ext_resource path="res://src/mob/mob3/flower.gd" type="Script" id=1]
+[ext_resource path="res://assets/flower/attackright/attack_left05.png" type="Texture" id=2]
+[ext_resource path="res://assets/flower/attackright/attack_left06.png" type="Texture" id=3]
+[ext_resource path="res://assets/flower/attackleft/attack_right08.png" type="Texture" id=4]
+[ext_resource path="res://assets/flower/attackright/attack_left01.png" type="Texture" id=5]
+[ext_resource path="res://assets/flower/attackright/attack_left02.png" type="Texture" id=6]
+[ext_resource path="res://assets/flower/attackright/attack_left03.png" type="Texture" id=7]
+[ext_resource path="res://assets/flower/attackright/attack_left04.png" type="Texture" id=8]
+[ext_resource path="res://assets/flower/attackright/attack_left07.png" type="Texture" id=9]
+[ext_resource path="res://assets/flower/attackright/attack_left08.png" type="Texture" id=10]
+[ext_resource path="res://assets/flower/die/hit01.png" type="Texture" id=11]
+[ext_resource path="res://assets/flower/die/hit02.png" type="Texture" id=12]
+[ext_resource path="res://assets/flower/attackleft/attack_right01.png" type="Texture" id=13]
+[ext_resource path="res://assets/flower/attackleft/attack_right02.png" type="Texture" id=14]
+[ext_resource path="res://assets/flower/attackleft/attack_right04.png" type="Texture" id=15]
+[ext_resource path="res://assets/flower/attackleft/attack_right05.png" type="Texture" id=16]
+[ext_resource path="res://assets/flower/attackleft/attack_right07.png" type="Texture" id=17]
+[ext_resource path="res://assets/flower/attackleft/attack_right03.png" type="Texture" id=18]
+[ext_resource path="res://assets/flower/attackleft/attack_right06.png" type="Texture" id=19]
+[ext_resource path="res://assets/flower/idle/idle08.png" type="Texture" id=20]
+[ext_resource path="res://assets/flower/idle/idle07.png" type="Texture" id=21]
+[ext_resource path="res://assets/flower/idle/idle06.png" type="Texture" id=22]
+[ext_resource path="res://assets/flower/idle/idle02.png" type="Texture" id=23]
+[ext_resource path="res://assets/flower/die/hit03.png" type="Texture" id=24]
+[ext_resource path="res://assets/flower/idle/idle01.png" type="Texture" id=25]
+[ext_resource path="res://assets/flower/idle/idle04.png" type="Texture" id=26]
+[ext_resource path="res://assets/flower/idle/idle05.png" type="Texture" id=27]
+[ext_resource path="res://assets/flower/idle/idle03.png" type="Texture" id=28]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 25 ), ExtResource( 23 ), ExtResource( 28 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 22 ), ExtResource( 21 ), ExtResource( 20 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 24 ) ],
+"loop": true,
+"name": "die",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 9 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "atkright",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 18 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 19 ), ExtResource( 17 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "atkleft",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 20.7109, 21.1751 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 29.6777, 34.8613 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 36.7694, 55.6392 )
+
+[node name="flower" type="KinematicBody2D"]
+collision_layer = 2
+collision_mask = 9
+script = ExtResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -0.943848, -65 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 1 )
+animation = "atkright"
+frame = 4
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 3.30359, -19.3494 )
+shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 2.8316, -26.4285 )
+shape = SubResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Label" type="Label" parent="Camera2D"]
+margin_left = -44.834
+margin_top = -107.13
+margin_right = -2.83401
+margin_bottom = -93.1297
+text = "Health"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="Camera2D"]
+margin_left = 1.4158
+margin_top = -106.658
+margin_right = 41.4158
+margin_bottom = -92.6578
+text = "20/20"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="flower" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="flower"]
+position = Vector2( -37, -25 )
+shape = SubResource( 4 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="left" from="." to="." method="_on_flower_left"]
+[connection signal="right" from="." to="." method="_on_flower_right"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="area_shape_entered" from="Area2D" to="." method="_on_Area2D_area_shape_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

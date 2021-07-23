@@ -1,0 +1,106 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://src/mob/mob2/zombie.gd" type="Script" id=1]
+[ext_resource path="res://assets/zombie/right/1.png" type="Texture" id=2]
+[ext_resource path="res://assets/zombie/up/3.png" type="Texture" id=3]
+[ext_resource path="res://assets/zombie/right/2.png" type="Texture" id=4]
+[ext_resource path="res://assets/zombie/down/3.png" type="Texture" id=5]
+[ext_resource path="res://assets/zombie/left/3.png" type="Texture" id=6]
+[ext_resource path="res://assets/zombie/2.png" type="Texture" id=7]
+[ext_resource path="res://assets/zombie/up/2.png" type="Texture" id=8]
+[ext_resource path="res://assets/zombie/down/2.png" type="Texture" id=9]
+[ext_resource path="res://assets/zombie/left/1.png" type="Texture" id=10]
+[ext_resource path="res://assets/zombie/left/2.png" type="Texture" id=11]
+[ext_resource path="res://assets/zombie/up/1.png" type="Texture" id=12]
+[ext_resource path="res://assets/zombie/right/3.png" type="Texture" id=13]
+[ext_resource path="res://assets/zombie/down/1.png" type="Texture" id=14]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16.4964, 9.92277 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 22.9174, 37.4596 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "right",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 8 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "up",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ), ExtResource( 9 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "down",
+"speed": 5.0
+} ]
+
+[node name="zombie" type="KinematicBody2D"]
+collision_layer = 2
+collision_mask = 9
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -1.74643, -16.5772 )
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="zombie" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="zombie"]
+position = Vector2( -0.667397, -41.5404 )
+shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Label" type="Label" parent="Camera2D"]
+margin_left = -43.0442
+margin_top = -96.1592
+margin_right = -1.04415
+margin_bottom = -82.1592
+text = "Health"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="Camera2D"]
+margin_left = 0.943863
+margin_top = -96.6607
+margin_right = 40.9439
+margin_bottom = -82.6607
+text = "50/50"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -0.639028, -42.1067 )
+scale = Vector2( 1.65529, 1.74176 )
+frames = SubResource( 3 )
+animation = "left"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[connection signal="attacked" from="." to="." method="_on_zombie_attacked"]
+[connection signal="area_entered" from="zombie" to="." method="_on_Area2D_area_entered"]
