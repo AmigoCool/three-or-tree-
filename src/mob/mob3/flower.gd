@@ -2,6 +2,7 @@ extends KinematicBody2D
 var flower_hp = 20
 var attack_where = 1
 var attack_time = 1
+var near = 0
 signal right
 signal left
 
@@ -34,6 +35,8 @@ func _on_Area2D_area_entered(area:Area2D):
 			flower_hp -= 3
 		elif Global.weapon == 3 :
 			flower_hp -= 3
+		elif Global.weapon == 4 :
+			flower_hp -= 4
 		if flower_hp <= 0 :
 			get_node("CollisionShape2D").disabled = true
 			Global.flower_kill += 1
@@ -41,19 +44,29 @@ func _on_Area2D_area_entered(area:Area2D):
 
 
 func _on_flower_left():
-	attack_time = 1
-	$flower/CollisionShape2D.position = Vector2(-37,-25)
-	$flower/CollisionShape2D.disabled = false
-	$AnimatedSprite.animation = "atkleft"
-	$AnimatedSprite.play()
-	yield(get_tree().create_timer(2), "timeout")
-	attack_time = 0
+	if near == 1 :
+		attack_time = 1
+		$flower/CollisionShape2D.position = Vector2(-37,-25)
+		$flower/CollisionShape2D.disabled = false
+		$AnimatedSprite.animation = "atkleft"
+		$AnimatedSprite.play()
+		yield(get_tree().create_timer(2), "timeout")
+		attack_time = 0
 
 func _on_flower_right():
-	attack_time = 1 
-	$flower/CollisionShape2D.position = Vector2(37,-25)
-	$flower/CollisionShape2D.disabled = false
-	$AnimatedSprite.animation = "atkright"
-	$AnimatedSprite.play()
-	yield(get_tree().create_timer(2), "timeout")
-	attack_time = 0
+	if near == 1 :
+		attack_time = 1 
+		$flower/CollisionShape2D.position = Vector2(37,-25)
+		$flower/CollisionShape2D.disabled = false
+		$AnimatedSprite.animation = "atkright"
+		$AnimatedSprite.play()
+		yield(get_tree().create_timer(2), "timeout")
+		attack_time = 0
+
+
+func _on_Area2D2_body_entered(body):
+	near = 1 
+
+
+func _on_Area2D2_body_exited(body):
+	near = 0

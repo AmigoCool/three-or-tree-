@@ -7,22 +7,23 @@ script = ExtResource( 1 )
 
 [node name="Button" type="Button" parent="."]
 margin_left = 440.502
-margin_top = 230.739
+margin_top = 229.848
 margin_right = 587.502
-margin_bottom = 284.739
+margin_bottom = 283.848
 text = "START"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="."]
-margin_left = 425.015
-margin_top = 295.997
-margin_right = 614.015
-margin_bottom = 343.997
+margin_left = 418.326
+margin_top = 296.0
+margin_right = 612.326
+margin_bottom = 361.0
 text = "WASD : move
-B : use backpack
-left click : attack  & collection"
+B : open Inventory
+left click : attack  & collection
+right click : use item and build"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false

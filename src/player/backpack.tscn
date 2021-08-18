@@ -4,69 +4,277 @@
 [ext_resource path="res://src/player/backpack.gd" type="Script" id=2]
 
 [node name="inventory" type="Node2D"]
+z_index = 5
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -407.866, 0.767334 )
-scale = Vector2( 3.32813, 3.57813 )
+position = Vector2( 72, -32 )
+scale = Vector2( 8, 4 )
+z_index = 4
+z_as_relative = false
 texture = ExtResource( 1 )
+offset = Vector2( -9, 8 )
 
 [node name="Label" type="Label" parent="."]
-margin_left = -507.764
-margin_top = -92.996
-margin_right = -452.764
-margin_bottom = -71.996
+margin_left = -248.0
+margin_top = -104.0
+margin_right = -200.0
+margin_bottom = -88.0
 text = "woods:"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="woods" type="Label" parent="."]
-margin_left = -466.366
-margin_top = -106.733
-margin_right = -426.366
-margin_bottom = -92.7327
+margin_left = -208.0
+margin_top = -120.0
+margin_right = -168.0
+margin_bottom = -106.0
 text = "0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label3" type="Label" parent="."]
-margin_left = -508.366
-margin_top = -106.733
-margin_right = -468.366
-margin_bottom = -92.7327
+margin_left = -248.0
+margin_top = -120.0
+margin_right = -208.0
+margin_bottom = -106.0
 text = "stone:"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="stone" type="Label" parent="."]
-margin_left = -459.366
-margin_top = -91.7327
-margin_right = -419.366
-margin_bottom = -77.7327
+margin_left = -200.0
+margin_top = -104.0
+margin_right = -160.0
+margin_bottom = -90.0
 text = "0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label5" type="Label" parent="."]
-margin_left = -508.575
-margin_top = -77.9146
-margin_right = -468.575
-margin_bottom = -63.9146
+margin_left = -248.0
+margin_top = -88.0
+margin_right = -208.0
+margin_bottom = -74.0
 text = "grass:"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="grass" type="Label" parent="."]
-margin_left = -467.44
-margin_top = -76.5941
-margin_right = -427.44
-margin_bottom = -62.5941
+margin_left = -208.0
+margin_top = -88.0
+margin_right = -168.0
+margin_bottom = -74.0
 text = "0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="sword" type="Button" parent="."]
+margin_top = -80.0
+margin_right = 48.0
+margin_bottom = -60.0
+disabled = true
+text = "Craft"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="."]
+margin_left = -248.0
+margin_top = -72.0
+margin_right = -40.0
+margin_bottom = -58.0
+rect_pivot_offset = Vector2( -5.61868, 14 )
+text = "Sword 10stone+5woods+5grass"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label4" type="Label" parent="."]
+margin_left = -248.0
+margin_top = -48.0
+margin_right = -40.0
+margin_bottom = -34.0
+rect_pivot_offset = Vector2( 40.6664, 7 )
+text = "Axe 10stone+5woods+5grass"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label6" type="Label" parent="."]
+margin_left = -248.0
+margin_top = -24.0
+margin_right = -30.0
+margin_bottom = -10.0
+rect_pivot_offset = Vector2( 49.208, 7 )
+text = "Pickaxe 10stone+5woods+5grass"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="axe" type="Button" parent="."]
+margin_top = -56.0
+margin_right = 48.0
+margin_bottom = -35.0
+disabled = true
+text = "Craft"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="pickaxe" type="Button" parent="."]
+margin_top = -32.0
+margin_right = 48.0
+margin_bottom = -12.0
+disabled = true
+text = "Craft"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label7" type="Label" parent="."]
+margin_left = -248.0
+margin_top = 64.0
+margin_right = -29.0
+margin_bottom = 78.0
+rect_pivot_offset = Vector2( 49.208, 7 )
+text = "House 20stone+20woods+20grass"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="house" type="Button" parent="."]
+margin_top = 56.0
+margin_right = 48.0
+margin_bottom = 76.0
+disabled = true
+text = "Build"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label8" type="Label" parent="."]
+margin_left = -248.0
+margin_top = 88.0
+margin_right = -29.0
+margin_bottom = 102.0
+rect_pivot_offset = Vector2( 49.208, 7 )
+text = "Chest 20woods+10grass"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="chest" type="Button" parent="."]
+margin_top = 80.0
+margin_right = 48.0
+margin_bottom = 100.0
+disabled = true
+text = "Build"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label9" type="Label" parent="."]
+margin_left = -248.0
+margin_top = 112.0
+margin_right = 10.0
+margin_bottom = 143.0
+rect_pivot_offset = Vector2( 49.208, 7 )
+text = "altar 50stone+50woods+50grass"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="boss" type="Button" parent="."]
+margin_top = 104.0
+margin_right = 48.0
+margin_bottom = 124.0
+disabled = true
+text = "Build"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="sworde" type="Button" parent="."]
+margin_left = 56.0
+margin_top = -80.0
+margin_right = 104.0
+margin_bottom = -60.0
+disabled = true
+text = "equip"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="pickaxee" type="Button" parent="."]
+margin_left = 56.0
+margin_top = -32.0
+margin_right = 104.0
+margin_bottom = -12.0
+rect_pivot_offset = Vector2( -400, 40 )
+disabled = true
+text = "equip"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Axee" type="Button" parent="."]
+margin_left = 56.0
+margin_top = -56.0
+margin_right = 104.0
+margin_bottom = -36.0
+disabled = true
+text = "equip"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label10" type="Label" parent="."]
+margin_left = -248.0
+margin_right = -30.0
+margin_bottom = 14.0
+rect_pivot_offset = Vector2( 49.208, 7 )
+text = "Bow 15woods+10grass"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bow" type="Button" parent="."]
+margin_top = -8.0
+margin_right = 48.0
+margin_bottom = 13.0
+disabled = true
+text = "Craft"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bowe" type="Button" parent="."]
+margin_left = 56.0
+margin_top = -8.0
+margin_right = 104.0
+margin_bottom = 12.0
+rect_pivot_offset = Vector2( -400, 40 )
+disabled = true
+text = "equip"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="sword" to="." method="_on_sword_pressed"]
+[connection signal="pressed" from="axe" to="." method="_on_axe_pressed"]
+[connection signal="pressed" from="pickaxe" to="." method="_on_pickaxe_pressed"]
+[connection signal="pressed" from="house" to="." method="_on_house_pressed"]
+[connection signal="pressed" from="chest" to="." method="_on_chest_pressed"]
+[connection signal="pressed" from="boss" to="." method="_on_boss_pressed"]
+[connection signal="pressed" from="sworde" to="." method="_on_sworde_pressed"]
+[connection signal="pressed" from="pickaxee" to="." method="_on_pickaxee_pressed"]
+[connection signal="pressed" from="Axee" to="." method="_on_Axee_pressed"]
+[connection signal="pressed" from="bow" to="." method="_on_bow_pressed"]
+[connection signal="pressed" from="bowe" to="." method="_on_bowe_pressed"]

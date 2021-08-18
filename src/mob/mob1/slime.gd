@@ -59,6 +59,8 @@ func _on_Area2D_area_entered(area:Area2D):
 			slime_hp -= 3
 		elif Global.weapon == 3 :
 			slime_hp -= 3
+		elif Global.weapon == 4 :
+			slime_hp -= 4
 		if slime_hp <= 0 :
 			get_node("CollisionShape2D").disabled = true
 			Global.slime_kill += 1

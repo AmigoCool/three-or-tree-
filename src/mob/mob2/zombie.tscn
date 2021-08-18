@@ -16,7 +16,7 @@
 [ext_resource path="res://assets/zombie/down/1.png" type="Texture" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16.4964, 9.92277 )
+extents = Vector2( 16.7464, 26.1728 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 22.9174, 37.4596 )
@@ -55,11 +55,8 @@ collision_mask = 9
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -1.74643, -16.5772 )
+position = Vector2( -0.74643, -34.3272 )
 shape = SubResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="zombie" type="Area2D" parent="."]
 collision_layer = 2
@@ -102,5 +99,9 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+
 [connection signal="attacked" from="." to="." method="_on_zombie_attacked"]
 [connection signal="area_entered" from="zombie" to="." method="_on_Area2D_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -28,9 +28,6 @@ func _process(delta):
 		else : #右
 			$AnimatedSprite.animation = "right"
 			$AnimatedSprite.play()
-	if day == 1:
-		$AnimatedSprite.animation = "idle"
-		$AnimatedSprite.play()
 
 func _on_Area2D_area_entered(area:Area2D):
 	if area.name =="area2Dattack":
@@ -43,6 +40,8 @@ func _on_Area2D_area_entered(area:Area2D):
 			health -= 3
 		elif Global.weapon == 3 :
 			health -= 3
+		elif Global.weapon == 4 :
+			health -= 4
 		if health <= 0 :
 			get_node("CollisionShape2D").disabled = true
 			Global.zombie_kill += 1
@@ -57,6 +56,7 @@ func _on_zombie_attacked():
 
 
 func _on_CanvasModulate_day():
+	$Timer.start()
 	day = 1
 	night = 0
 
@@ -64,3 +64,10 @@ func _on_CanvasModulate_day():
 func _on_CanvasModulate_night():
 	night = 1
 	day = 0
+
+
+func _on_Timer_timeout():
+	health -=1
+	if health <= 0: 
+		get_node("CollisionShape2D").disabled = true
+		queue_free()

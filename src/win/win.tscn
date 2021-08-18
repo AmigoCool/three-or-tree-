@@ -1,21 +1,21 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://src/died/died.gd" type="Script" id=1]
+[ext_resource path="res://src/win/win.gd" type="Script" id=1]
 
-[node name="Control" type="Node2D"]
+[node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="Label" type="Label" parent="."]
+[node name="Label2" type="Label" parent="."]
 margin_left = 472.346
 margin_top = 202.67
 margin_right = 540.346
 margin_bottom = 219.67
-text = "YOU DIED!"
+text = "YOU WIN!"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label2" type="Label" parent="."]
+[node name="Label3" type="Label" parent="."]
 margin_left = 388.823
 margin_top = 222.487
 margin_right = 463.823
@@ -36,7 +36,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label3" type="Label" parent="."]
+[node name="Label4" type="Label" parent="."]
 margin_left = 393.061
 margin_top = 237.32
 margin_right = 456.061
@@ -57,7 +57,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label4" type="Label" parent="."]
+[node name="Label5" type="Label" parent="."]
 margin_left = 392.217
 margin_top = 252.494
 margin_right = 458.217

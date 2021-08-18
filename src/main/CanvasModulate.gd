@@ -15,7 +15,7 @@ func _process(delta):
 func _on_daynight_timeout():
 	#print(time)
 	time += 1
-	if time >= 70:
+	if time >= 72:
 		time = 0
 	if time >= 54 :
 		emit_signal("night")
@@ -23,3 +23,5 @@ func _on_daynight_timeout():
 		emit_signal("night")
 	else:
 		emit_signal("day")
+
+
