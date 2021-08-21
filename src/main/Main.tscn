@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://assets/background/grass.png" type="Texture" id=1]
 [ext_resource path="res://src/mob/mob1/slime.tscn" type="PackedScene" id=2]
@@ -26,7 +26,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 4, 6, 9, 12.1, 17.1, 19.1, 24 ),
+"times": PoolRealArray( 0, 3.5, 5, 9, 12.1, 17.1, 19.1, 24 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 0.0509804, 0.117647, 0.301961, 1 ), Color( 0.0509804, 0.117647, 0.301961, 1 ), Color( 0.65098, 0.505882, 0.0627451, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0.662745, 0.54902, 0.027451, 1 ), Color( 0.0862745, 0.254902, 0.47451, 1 ), Color( 0.0509804, 0.117647, 0.301961, 1 ) ]
@@ -143,14 +143,17 @@ extents = Vector2( 942.537, 486.609 )
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 186.585, 96.0645 )
 
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 27.6457, 44.2906 )
+
 [node name="Main" type="Node2D"]
 script = ExtResource( 15 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
-margin_left = -5176.95
-margin_top = -3127.15
-margin_right = 4258.05
-margin_bottom = 3397.85
+margin_left = -5118.99
+margin_top = -2998.64
+margin_right = 4316.01
+margin_bottom = 3526.36
 texture = ExtResource( 1 )
 expand = true
 stretch_mode = 2
@@ -160,7 +163,7 @@ __meta__ = {
 
 [node name="CanvasModulate" type="CanvasModulate" parent="TextureRect"]
 position = Vector2( 4694, 7215 )
-color = Color( 0.0117647, 0.0705882, 0.227451, 1 )
+color = Color( 0.0509804, 0.117647, 0.301961, 1 )
 script = ExtResource( 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TextureRect/CanvasModulate"]
@@ -181,7 +184,7 @@ position = Vector2( -170.807, -68.9222 )
 position = Vector2( -120.722, -265.996 )
 
 [node name="zombie" parent="." instance=ExtResource( 6 )]
-position = Vector2( -136.977, 104.904 )
+position = Vector2( -1361.62, -744.261 )
 
 [node name="tree" parent="." instance=ExtResource( 7 )]
 position = Vector2( 653.246, -179.063 )
@@ -228,6 +231,15 @@ position = Vector2( 9434.94, -779.763 )
 [node name="daynight" type="Timer" parent="."]
 autostart = true
 
+[node name="overlap" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 31
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="overlap"]
+position = Vector2( 5945.66, 1200.38 )
+shape = SubResource( 7 )
+
+[connection signal="overlaping" from="." to="." method="_on_Main_overlaping"]
 [connection signal="day" from="TextureRect/CanvasModulate" to="zombie" method="_on_CanvasModulate_day"]
 [connection signal="day" from="TextureRect/CanvasModulate" to="." method="_on_CanvasModulate_day"]
 [connection signal="night" from="TextureRect/CanvasModulate" to="zombie" method="_on_CanvasModulate_night"]
@@ -245,3 +257,4 @@ autostart = true
 [connection signal="body_exited" from="Area2D" to="player" method="_on_Area2D_body_exited"]
 [connection signal="body_entered" from="leavehouse" to="." method="_on_leavehouse_body_entered"]
 [connection signal="timeout" from="daynight" to="TextureRect/CanvasModulate" method="_on_daynight_timeout"]
+[connection signal="body_entered" from="overlap" to="." method="_on_overlap_body_entered"]

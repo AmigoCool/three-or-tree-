@@ -4,22 +4,22 @@
 [ext_resource path="res://assets/resources/breakstone.png" type="Texture" id=2]
 [ext_resource path="res://src/resources/stone/stone.gd" type="Script" id=3]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 36.0038, 30.1886 )
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 33.331, 15.9342 )
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
-"loop": true,
-"name": "breaked",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,
 "name": "stone",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "breaked",
 "speed": 5.0
 } ]
 
@@ -30,14 +30,14 @@ script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 1.33633, -32.5178 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 2.22726, -23.6088 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0.445465, -64.5902 )

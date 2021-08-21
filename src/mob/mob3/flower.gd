@@ -26,7 +26,7 @@ func _on_Timer_timeout():
 	
 
 func _on_Area2D_area_entered(area:Area2D):
-	if area.name =="area2Dattack":
+	if area.name =="area2Dattack"  or area.name =="explosion" :
 		if Global.weapon == 0 :
 			flower_hp -= 2
 		elif Global.weapon == 1 :
@@ -37,9 +37,12 @@ func _on_Area2D_area_entered(area:Area2D):
 			flower_hp -= 3
 		elif Global.weapon == 4 :
 			flower_hp -= 4
+		elif Global.weapon == 5 :
+			flower_hp -= 8
 		if flower_hp <= 0 :
 			get_node("CollisionShape2D").disabled = true
 			Global.flower_kill += 1
+			Global.floweramount -= 1
 			queue_free()
 
 

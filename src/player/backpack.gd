@@ -30,6 +30,10 @@ func _process(delta):
 		$bow.disabled = false
 	else:
 		$bow.disabled = true
+	if Global.wood >= 20 and Global.grass >=20 and Global.explosion == 0 :
+		$exlposion.disabled = false
+	else:
+		$exlposion.disabled = true
 	if Global.sword == -1 :
 		$sworde.disabled = false
 	else:
@@ -46,7 +50,11 @@ func _process(delta):
 		$bowe.disabled = false
 	else:
 		$bowe.disabled = true
-
+	if Global.explosion == -1 :
+		$exlposione.disabled = false
+	else:
+		$exlposione.disabled = true
+		
 	if Global.stone >= 20 and Global.wood >= 20 and Global.grass >= 20 and Global.house == -1  :
 		$house.disabled = false
 	else:
@@ -55,7 +63,8 @@ func _process(delta):
 		$chest.disabled = false
 	else:
 		$chest.disabled = true
-	if Global.stone >= 50 and Global.wood >= 50 and Global.grass >= 50 and Global.boss == -1 and Global.house == 1 and Global.chest == 1 :
+	
+	if Global.stone >= 50 and Global.wood >= 50 and Global.grass >= 50 and Global.boss == -1 and Global.house == 1 and Global.chest == 1  and Global.pickaxe != 0  and Global.axe != 0 and Global.sword != 0 and Global.bow != 0:
 		$boss.disabled = false
 	else:
 		$boss.disabled = true
@@ -121,6 +130,8 @@ func _on_sworde_pressed():
 			Global.pickaxe = -1
 		if Global.bow != 0 :
 			Global.bow = -1
+		if Global.explosion != 0 :
+			Global.explosion = -1
 
 
 func _on_Axee_pressed():
@@ -132,6 +143,8 @@ func _on_Axee_pressed():
 			Global.pickaxe = -1
 		if Global.bow != 0 :
 			Global.bow = -1
+		if Global.explosion != 0 :
+			Global.explosion = -1
 		Global.axe = 1
 
 
@@ -145,6 +158,8 @@ func _on_pickaxee_pressed():
 			Global.axe = -1
 		if Global.bow != 0 :
 			Global.bow = -1
+		if Global.explosion != 0 :
+			Global.explosion = -1
 		Global.pickaxe = 1
 
 
@@ -158,7 +173,29 @@ func _on_bowe_pressed():
 			Global.axe = -1
 		if Global.pickaxe != 0 :
 			Global.pickaxe = -1
+		if Global.explosion != 0 :
+			Global.explosion = -1
 		Global.bow = 1
 
 
 
+
+
+func _on_exlposion_pressed():
+	Global.wood -= 20
+	Global.grass -=20 
+	Global.explosion = -1
+
+
+func _on_exlposione_pressed():
+	if Global.explosion == -1 :
+		Global.weapon = 5
+		if Global.sword != 0:
+			Global.sword = -1 
+		if Global.axe != 0:
+			Global.axe = -1
+		if Global.pickaxe != 0 :
+			Global.pickaxe = -1
+		if Global.bow != 0 :
+			Global.bow = -1
+		Global.explosion = 1

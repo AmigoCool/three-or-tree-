@@ -8,13 +8,13 @@ signal attacked
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
+	get_node("/root/Main/TextureRect/CanvasModulate").connect("night",self,"_on_CanvasModulate_night")
+	get_node("/root/Main/TextureRect/CanvasModulate").connect("day",self,"_on_CanvasModulate_day")
 func _process(delta):
 	$Camera2D/Label2.text = str(health) + "/50"
 	var direction = (Global.player_pos - get_global_position()).normalized()
 	var walkwhere = rad2deg(get_global_position().angle_to_point(Global.player_pos))
-	if attacked == 0 and night == 1:
+	if attacked == 0 :
 		move_and_slide(direction*speed) 
 		if walkwhere <= 45 and walkwhere >= -45 : #左
 			$AnimatedSprite.animation = "left"
@@ -30,7 +30,7 @@ func _process(delta):
 			$AnimatedSprite.play()
 
 func _on_Area2D_area_entered(area:Area2D):
-	if area.name =="area2Dattack":
+	if area.name =="area2Dattack" or area.name =="explosion" :
 		emit_signal("attacked")
 		if Global.weapon == 0 :
 			health -= 2
@@ -42,9 +42,12 @@ func _on_Area2D_area_entered(area:Area2D):
 			health -= 3
 		elif Global.weapon == 4 :
 			health -= 4
+		elif Global.weapon == 5 :
+			health -= 8
 		if health <= 0 :
 			get_node("CollisionShape2D").disabled = true
 			Global.zombie_kill += 1
+			Global.zombieamount -= 1
 			queue_free()
 
 
@@ -70,4 +73,5 @@ func _on_Timer_timeout():
 	health -=1
 	if health <= 0: 
 		get_node("CollisionShape2D").disabled = true
+		Global.zombieamount -= 1
 		queue_free()

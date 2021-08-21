@@ -1,13 +1,13 @@
 extends CanvasModulate
-var time = 25
+var time = 35
 signal night
 signal day
 
 func _ready():
-	pass # Replace with function body.
+	pass
 
 func _process(delta):
-	var currentframe = range_lerp(time,0,72,0,24)
+	var currentframe = range_lerp(time,0,120,0,24)
 	#print(currentframe)
 	$AnimationPlayer.play("day_night")
 	$AnimationPlayer.seek(currentframe,true)
@@ -15,11 +15,11 @@ func _process(delta):
 func _on_daynight_timeout():
 	#print(time)
 	time += 1
-	if time >= 72:
+	if time >= 120:
 		time = 0
-	if time >= 54 :
+	if time >= 95 :
 		emit_signal("night")
-	elif time <= 24 :
+	elif time <= 30 :
 		emit_signal("night")
 	else:
 		emit_signal("day")

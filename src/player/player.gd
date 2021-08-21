@@ -18,13 +18,15 @@ onready var chest = preload("res://src/building/chest/cheset.tscn")
 onready var volumeset = preload("res://src/player/volume_set.tscn")
 onready var arrow = preload("res://src/player/bow/arrow.tscn")
 signal beattack
-signal attack
+signal attackdd
 signal attack2
+signal attack
 signal closeBackpack
 signal bowattack
 signal bhouse
 signal bchest
 signal baltar
+signal explosion
 
 func _ready():
 	$area2Dattack/attackarea.disabled = true
@@ -93,7 +95,7 @@ func _process(delta):
 			$AnimatedSprite.play()
 
 
-		if attackwhere <= 45 and attackwhere >= -45 and Global.weapon != 4 : #右
+		if attackwhere <= 45 and attackwhere >= -45 and Global.weapon != 4 and Global.weapon != 5 : #右
 			attackwhere = 0
 			emit_signal("attack")
 			$AnimatedSprite.animation = "sideattack"
@@ -102,7 +104,7 @@ func _process(delta):
 			$area2Dattack/attackarea.disabled = false
 			$area2Dattack/attackarea.position = Vector2(45,-37.5)
 			$area2Dattack/attackarea.rotation_degrees = 90
-		elif attackwhere <= -45 and attackwhere >= -135 and Global.weapon != 4 : #上
+		elif attackwhere <= -45 and attackwhere >= -135 and Global.weapon != 4 and Global.weapon != 5 : #上
 			attackwhere = 0
 			emit_signal("attack")
 			$AnimatedSprite.animation = "upattack"
@@ -110,7 +112,7 @@ func _process(delta):
 			$area2Dattack/attackarea.disabled = false
 			$area2Dattack/attackarea.position = Vector2(0,-85)
 			$area2Dattack/attackarea.rotation_degrees = 0
-		elif attackwhere <= 135 and attackwhere >= 45 and Global.weapon != 4 : #下
+		elif attackwhere <= 135 and attackwhere >= 45 and Global.weapon != 4 and Global.weapon != 5: #下
 			attackwhere = 0
 			emit_signal("attack")
 			$AnimatedSprite.animation = "downattack"
@@ -118,7 +120,7 @@ func _process(delta):
 			$area2Dattack/attackarea.disabled = false
 			$area2Dattack/attackarea.position = Vector2(0,0)
 			$area2Dattack/attackarea.rotation_degrees = 0
-		elif Global.weapon != 4 : #左
+		elif Global.weapon != 4 and Global.weapon != 5 : #左
 			attackwhere = 0
 			emit_signal("attack")
 			$AnimatedSprite.animation = "sideattack"
@@ -126,11 +128,15 @@ func _process(delta):
 			$area2Dattack/attackarea.disabled = false
 			$area2Dattack/attackarea.position = Vector2(-40,-37.5)
 			$area2Dattack/attackarea.rotation_degrees = 90
+		elif Global.weapon == 5 :
+			$explosion/attackarea.disabled = false
+			$AnimatedSprite.animation = ("explosion")
+			emit_signal("attack")
 
 	if Input.is_action_just_pressed("backpack") : #開背包
 		Global.backpack = Global.backpack * -1
 		idle = idle * -1
-		if Global.backpack == -1:
+		if Global.backpack == -1 :
 			var openbackpack =  Backpack.instance()
 			$Camera2D2.add_child(openbackpack)
 
@@ -138,9 +144,11 @@ func _process(delta):
 		Global.chest = Global.chest * -1
 		idle = idle * -1
 		attacktime =  attacktime * -1
-		if Global.chest == -1:
+		if Global.chest == -1 :
 			var openchest = chest.instance()
 			$Camera2D2.add_child(openchest)
+		
+
 
 	if Global.bhouse == 1 :
 		Global.backpack = Global.backpack * -1
@@ -174,7 +182,7 @@ func _process(delta):
 			emit_signal("baltar")
 	if Global.altarnear == 1 and Input.is_action_just_pressed("rightclick"):
 		Global.altaron = 1
-		
+
 func _on_KinematicBody2D_attack(): #使攻擊動畫只攻擊一次
 	attacktime = 1
 	if attacktime == 1 and idle == 1 :
@@ -190,6 +198,9 @@ func _on_KinematicBody2D_attack(): #使攻擊動畫只攻擊一次
 		elif $AnimatedSprite.animation == "upattack":
 			$AnimatedSprite.stop()
 			$area2Dattack/attackarea.disabled = true
+		elif $AnimatedSprite.animation == "explosion" :
+			$AnimatedSprite.stop()
+			$explosion/attackarea.disabled = true
 
 func minusHP(DamagedFrom: String) -> void: #扣血
 	if DamagedFrom == "slime":
@@ -235,10 +246,15 @@ func _on_KinematicBody2D_attack2(): #攻擊音效
 		yield(get_tree().create_timer(0.3), "timeout")
 		$bow2.stop()
 
-
-func _on_KinematicBody2D_beattack(): #碰撞箱
+func _on_KinematicBody2D_beattack(): #被打音效 碰撞箱
+	hurtsound()
 	yield(get_tree().create_timer(1), "timeout")
 	$Node2D/CollisionShape2D.position = Vector2(0,-37)
+
+func hurtsound():
+	$hurt.play()
+	yield(get_tree().create_timer(0.3), "timeout")
+	$hurt.stop()
 
 func _on_TextureButton_pressed(): #設定
 	Global.volumeset = Global.volumeset * -1
@@ -246,7 +262,6 @@ func _on_TextureButton_pressed(): #設定
 		var openvolumeset =  volumeset.instance()
 		$Camera2D2.add_child(openvolumeset)
 		get_tree().paused = true
-
 
 func _on_KinematicBody2D_bowattack(): #拿弓攻擊時
 	var mouse_pos = get_global_mouse_position()  
@@ -264,10 +279,8 @@ func _on_KinematicBody2D_bowattack(): #拿弓攻擊時
 		Arrow.apply_central_impulse(bowpos)
 		bowcd = -1
 
-
 func _on_bow_timeout():
 	bowcd = 1
-
 
 func _on_inventory_boss():
 	Global.backpack = Global.backpack * -1
@@ -279,14 +292,11 @@ func _on_inventory_chest():
 	if Input.is_action_just_pressed("leftclick"):
 		idle = 1
 
-
 func _on_Area2D_body_entered(body):
 	Global.inhouse = 1
 
-
 func _on_Area2D_body_exited(body):
 	Global.inhouse = 0
-
 
 func _on_Node2D_goin():
 	global_position = Vector2(12000,8900)
@@ -294,12 +304,17 @@ func _on_Node2D_goin():
 func _on_StaticBody2D_near():
 	near = 1
 
-
 func _on_StaticBody2D_out():
 	Global.chest = 1
+	Global.backpack = 1
 	idle = 1
 	attacktime = 0
 	near = 0
 
 func _on_boss_win():
-	get_tree().change_scene("res://src/win/")
+	get_tree().change_scene("res://src/win/win.tscn")
+
+func _on_KinematicBody2D_explosion(): #explosion攻擊時
+	$explosion/attackarea.disabled = false
+	$AnimatedSprite.animation = ("explosion")
+	emit_signal("attack")
